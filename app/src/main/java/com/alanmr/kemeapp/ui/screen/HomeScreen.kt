@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.alanmr.kemeapp.ui.component.AccountCard
 import com.alanmr.kemeapp.ui.viewmodel.HomeScreenViewModel
 
 @Composable
@@ -26,13 +25,6 @@ fun HomeScreen(
        .fillMaxSize()
        .padding(5.dp)
        .verticalScroll(rememberScrollState())) {
-        AccountCard(account = viewModel.state().accountId, onTap = {}, onLogout = {
-            viewModel.logout {
-                navController.navigate("login"){
-                    this.popUpTo("login")
-                }
-            }
-        })
        Spacer(modifier = Modifier.size(4.dp))
        Text(text = "News", style = MaterialTheme.typography.h6)
        Spacer(modifier = Modifier.size(4.dp))
