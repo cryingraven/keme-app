@@ -5,16 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.alanmr.kemeapp.iconUri
 import com.alanmr.kemeapp.identityName
 import com.alanmr.kemeapp.modules.solana.Connected
+import com.alanmr.kemeapp.modules.solana.KemeContract
 import com.alanmr.kemeapp.modules.solana.NotConnected
 import com.alanmr.kemeapp.modules.solana.PersistentConnection
 import com.alanmr.kemeapp.solanaUri
 import com.alanmr.kemeapp.ui.state.LoginScreenState
 import com.portto.solana.web3.PublicKey
+import com.portto.solana.web3.programs.MemoProgram
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.RpcCluster
 import com.solana.mobilewalletadapter.clientlib.TransactionResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -24,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
     private val walletAdapter: MobileWalletAdapter,
-    private val persistentConnection: PersistentConnection
+    private val persistentConnection: PersistentConnection,
+    private val kemeContract: KemeContract
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginScreenState())
     fun state(): LoginScreenState{
@@ -48,7 +52,7 @@ class LoginScreenViewModel @Inject constructor(
             val result = walletAdapter.transact(sender) {
                 when (conn) {
                     is NotConnected -> {
-                        val authed = authorize(solanaUri, iconUri, identityName, RpcCluster.Devnet)
+                        val authed = authorize(solanaUri, iconUri, identityName, RpcCluster.Testnet)
                         Connected(
                             PublicKey(authed.publicKey),
                             authed.accountLabel ?: "",
@@ -57,6 +61,7 @@ class LoginScreenViewModel @Inject constructor(
                     }
                     is Connected -> {
                         val reauthed = reauthorize(solanaUri, iconUri, identityName, conn.authToken)
+                        MemoProgram
                         Connected(
                             PublicKey(reauthed.publicKey),
                             reauthed.accountLabel ?: "",

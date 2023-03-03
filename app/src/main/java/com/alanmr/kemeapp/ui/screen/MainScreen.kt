@@ -16,25 +16,43 @@ import androidx.compose.material.icons.outlined.EventAvailable
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.alanmr.kemeapp.ui.viewmodel.MainScreenViewModel
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 
 
 @Composable
 fun MainScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    sender: ActivityResultSender,
+    viewModel: MainScreenViewModel = hiltViewModel()
 ) {
+
+    LaunchedEffect(true){
+        viewModel.singMessage(sender, onFailed = {
+            navController.navigate("login"){
+                this.popUpTo("login"){
+                    inclusive=true
+                }
+            }
+        })
+    }
+
     var tabIndex by remember { mutableStateOf(0) }
     val tabsList = listOf("Home", "Missions", "Profile")
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Row(modifier = Modifier.fillMaxWidth().weight(2f)) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .weight(2f)) {
             when(tabIndex){
                 0-> HomeScreen(navController = navController)
                 1-> MissionScreen(navController = navController)
                 2-> ProfileScreen(navController = navController)
             }
         }
-        TabRow(selectedTabIndex = tabIndex) {
+        TabRow(selectedTabIndex = tabIndex, divider = {}) {
             tabsList.forEachIndexed { index, title ->
                 Tab(selected = tabIndex == index, onClick = {
                     tabIndex = index

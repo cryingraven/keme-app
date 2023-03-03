@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.alanmr.kemeapp.R
 
@@ -22,6 +23,7 @@ import com.alanmr.kemeapp.R
 @Composable
 fun AccountCard(
     account: String,
+    balance: String,
     onTap: ()-> Unit,
     onLogout: ()-> Unit
 ){
@@ -54,8 +56,9 @@ fun AccountCard(
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = account,
                 color = MaterialTheme.colors.onPrimary,
-                style = MaterialTheme.typography.caption,
-                maxLines = 1
+                style = MaterialTheme.typography.h6,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Image(painter = painterResource(id = R.drawable.gold),
@@ -66,7 +69,7 @@ fun AccountCard(
                     )
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row {
-                        Text(text = "1290", color = Color.White, style = MaterialTheme.typography.h5)
+                        Text(text = balance, color = Color.White, style = MaterialTheme.typography.h5)
                         Spacer(modifier = Modifier.size(5.dp))
                         Text(text = "Point", color = Color(0xFFF1B32B), style = MaterialTheme.typography.h5)
                     }

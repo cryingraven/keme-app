@@ -39,7 +39,6 @@ fun LoginScreen(
         KemeLogo(
             modifier = Modifier
                 .width(250.dp)
-                .height(80.dp)
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(text = stringResource(id = com.alanmr.kemeapp.R.string.tagline),

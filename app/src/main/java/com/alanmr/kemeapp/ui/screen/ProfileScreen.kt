@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alanmr.kemeapp.ui.component.AccountCard
+import com.alanmr.kemeapp.ui.component.ProfileMenuItem
 import com.alanmr.kemeapp.ui.viewmodel.ProfileScreenViewModel
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 
 
 @Composable
@@ -29,7 +31,7 @@ fun ProfileScreen(
         .fillMaxSize()
         .padding(5.dp)
         .verticalScroll(rememberScrollState())) {
-        AccountCard(account = profileSate.value.accountId, onTap = {}, onLogout = {
+        AccountCard(account = profileSate.value.accountId, balance = profileSate.value.balance, onTap = {}, onLogout = {
             viewModel.logout {
                 navController.navigate("login"){
                     this.popUpTo("login"){
@@ -37,6 +39,15 @@ fun ProfileScreen(
                     }
                 }
             }
+        })
+        ProfileMenuItem(text = "FAQ", onClick = {
+
+        })
+        ProfileMenuItem(text = "Term & Conditions", onClick = {
+
+        })
+        ProfileMenuItem(text = "About", onClick = {
+
         })
     }
 }

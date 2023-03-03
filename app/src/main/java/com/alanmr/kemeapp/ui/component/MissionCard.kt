@@ -23,12 +23,17 @@ fun MissionCard(){
                 .width(100.dp)
                 .padding(5.dp)
         )
-        Column(modifier = Modifier
+        Column(
+            modifier = Modifier
             .fillMaxWidth()
+                .height(100.dp)
             .weight(2f)
-            .padding(5.dp)) {
-            Text(text = "Mission Title", style = MaterialTheme.typography.h5)
+            .padding(5.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Mission Title", style = MaterialTheme.typography.h6)
             Text(text = "valid util: ", style = MaterialTheme.typography.caption, fontStyle = FontStyle.Italic)
+            Text(text = "Mission Caption", style = MaterialTheme.typography.caption)
         }
     }
 }

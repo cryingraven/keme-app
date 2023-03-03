@@ -17,7 +17,7 @@ fun MainUI(sender: ActivityResultSender){
             LoginScreen(sender = sender, navController)
         }
         composable("home"){
-            MainScreen(navController = navController)
+            MainScreen(navController = navController, sender)
         }
     }
 }
