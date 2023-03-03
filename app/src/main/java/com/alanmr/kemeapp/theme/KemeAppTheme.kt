@@ -10,7 +10,6 @@ fun KemeAppTheme(
 ) {
     MaterialTheme(
         colors = kemeColor,
-        kemeTypography,
         content = content
     )
 }

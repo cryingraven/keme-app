@@ -19,4 +19,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="logo">Logo</string>
+    <string name="sol">Solana</string>
+    <string name="point">Point</string>
+    <string name="login">SIGN IN</string>
+    <string name="logout">SIGN OUT</string>
+    <string name="account">Account</string>
+    <string name="tagline">"Get Cypto Rewards \n From Offline / Online Activity"</string>
 </resources>

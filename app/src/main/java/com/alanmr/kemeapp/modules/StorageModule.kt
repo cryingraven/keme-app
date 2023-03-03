@@ -1,15 +1,19 @@
 package com.alanmr.kemeapp.modules
 
-import dagger.Binds
+import android.content.Context
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @InstallIn(
-    ActivityComponent::class
+    ViewModelComponent::class
 )
 @Module
-abstract class StorageModule {
-    @Binds
-    abstract fun provideAccountStorage(accountStorageImpl: AccountStorageImpl): AccountStorage
+class StorageModule {
+    @Provides
+    fun provideAccountStorage(@ApplicationContext context: Context): AccountStorage{
+        return AccountStorageImpl(context)
+    }
 }

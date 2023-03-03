@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.alanmr.kemeapp.ui.screen.HomeScreen
 import com.alanmr.kemeapp.ui.screen.LoginScreen
+import com.alanmr.kemeapp.ui.screen.MainScreen
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 
 
@@ -17,7 +17,7 @@ fun MainUI(sender: ActivityResultSender){
             LoginScreen(sender = sender, navController)
         }
         composable("home"){
-            HomeScreen(navController = navController)
+            MainScreen(navController = navController)
         }
     }
 }
