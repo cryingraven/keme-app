@@ -1,6 +1,7 @@
 package com.alanmr.kemeapp.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,7 +16,10 @@ import com.alanmr.kemeapp.R
 
 @Composable
 fun MissionCard(){
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(modifier = Modifier.fillMaxWidth()
+        .clickable {
+
+        }) {
         Image(painter = painterResource(id = R.drawable.ticket),
             colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
             contentDescription = null,

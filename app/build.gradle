@@ -60,6 +60,11 @@ dependencies {
     implementation project(":web3")
     //solana
     implementation "com.solanamobile:mobile-wallet-adapter-clientlib-ktx:1.0.5"
+    // define a BOM and its version
+    implementation platform('com.squareup.okhttp3:okhttp-bom:4.9.3')
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection")
 
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.3"

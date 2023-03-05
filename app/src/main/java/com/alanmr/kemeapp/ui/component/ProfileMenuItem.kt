@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -29,7 +30,9 @@ fun ProfileMenuItem(
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.h6,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.weight(2f)
+                modifier = Modifier.weight(2f),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
             Icon(imageVector = Icons.Outlined.ChevronRight,
                 tint = MaterialTheme.colors.primary,
