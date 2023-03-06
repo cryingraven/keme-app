@@ -47,6 +47,13 @@ class LoginScreenViewModel @Inject constructor(
             if(connection.signature!="") {
                 onSuccess()
             }
+        }else{
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    isConnected = false,
+                )
+            }
         }
     }
     fun connect(sender: ActivityResultSender, onSuccess: ()-> Unit){
