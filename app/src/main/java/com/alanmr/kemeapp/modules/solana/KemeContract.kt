@@ -1,6 +1,7 @@
 package com.alanmr.kemeapp.modules.solana
 
 import android.util.Base64
+import android.util.Log
 import com.alanmr.kemeapp.iconUri
 import com.alanmr.kemeapp.identityName
 import com.alanmr.kemeapp.modules.AccountStorage
@@ -11,7 +12,9 @@ import com.portto.solana.web3.Transaction
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.TransactionResult
+import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
 import com.solana.mobilewalletadapter.clientlib.successPayload
+import org.bitcoinj.core.Base58
 import javax.inject.Inject
 
 class KemeContract @Inject constructor(
@@ -53,7 +56,8 @@ class KemeContract @Inject constructor(
             }
         }
     }
-    suspend fun requestSignature(sender: ActivityResultSender, onFailed: ()-> Unit){
+
+    suspend fun requestSignature(sender: ActivityResultSender, onSuccess: ()-> Unit){
         storage.getCurrentAccount()?.let {
             if(it.signature==""){
                 val result =walletAdapter.transact(sender){
@@ -63,16 +67,18 @@ class KemeContract @Inject constructor(
                 }
                 when(result){
                     is TransactionResult.Success -> {
-                        val signature = Base64.encodeToString(result.payload.signedPayloads[0], Base64.DEFAULT)
-                        val encodedToken = Base64.encodeToString( "${it.accountId}&${signature}".toByteArray(), Base64.DEFAULT)
+                        val signature = Base58.encode(result.payload.signedPayloads[0])
+                        val encodedToken = Base64.encodeToString( "${it.accountId}&${signature}".toByteArray(), Base64.NO_WRAP)
                         val newAccount = it.copy(signature = encodedToken)
                         storage.saveAccount(newAccount)
+                        onSuccess()
                     }
                     else->{
-                        onFailed()
+
                     }
                 }
             }
         }
     }
+
 }

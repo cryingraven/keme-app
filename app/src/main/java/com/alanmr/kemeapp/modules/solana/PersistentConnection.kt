@@ -1,5 +1,6 @@
 package com.alanmr.kemeapp.modules.solana
 
+import android.util.Base64
 import com.alanmr.kemeapp.model.Account
 import com.alanmr.kemeapp.modules.AccountStorage
 import com.portto.solana.web3.PublicKey
@@ -10,7 +11,8 @@ object NotConnected : WalletConnection()
 data class Connected(
     val publicKey: PublicKey,
     val accountLabel: String,
-    val authToken: String
+    val authToken: String,
+    val signature: String
 ): WalletConnection()
 
 class PersistentConnection @Inject constructor(
@@ -26,7 +28,7 @@ class PersistentConnection @Inject constructor(
                 val newConn = if (!storage.isLogin()) {
                     NotConnected
                 } else {
-                    Connected(PublicKey(account!!.publicKey), account.accountLabel, account.token)
+                    Connected(PublicKey(account!!.publicKey), account.accountLabel, account.token, account.signature)
                 }
                 return newConn
             }
@@ -40,7 +42,7 @@ class PersistentConnection @Inject constructor(
             pubKey.toBase58(),
             token
         ))
-        walletConnection = Connected(pubKey, accountLabel, token)
+        walletConnection = Connected(pubKey, accountLabel, token, "")
     }
 
     fun clearConnection(){

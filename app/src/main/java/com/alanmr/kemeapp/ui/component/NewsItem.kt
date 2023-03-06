@@ -25,7 +25,7 @@ fun NewsItem(
     url: String
 ){
     val context: Context = LocalContext.current
-    Column(modifier = Modifier.width(150.dp)
+    Column(modifier = Modifier.width(250.dp)
         .padding(5.dp)
         .clickable {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -35,7 +35,7 @@ fun NewsItem(
         AsyncImage(model = image,
             contentDescription = null,
             modifier = Modifier.fillMaxWidth()
-                .height(100.dp)
+                .height(200.dp)
                 .clip(shape = RoundedCornerShape(15.dp)),
             contentScale = ContentScale.FillWidth,
         )

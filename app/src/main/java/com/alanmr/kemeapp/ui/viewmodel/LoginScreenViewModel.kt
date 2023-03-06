@@ -17,7 +17,6 @@ import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.RpcCluster
 import com.solana.mobilewalletadapter.clientlib.TransactionResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -31,8 +30,8 @@ class LoginScreenViewModel @Inject constructor(
     private val kemeContract: KemeContract
 ) : ViewModel() {
     private val _state = MutableStateFlow(LoginScreenState())
-    fun state(): LoginScreenState{
-        return _state.value
+    fun state(): StateFlow<LoginScreenState>{
+        return _state
     }
     fun checkLogin(){
         val connection = persistentConnection.getWalletConnection()
@@ -40,13 +39,14 @@ class LoginScreenViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     isLoading = false,
-                    isLogin = true,
+                    isLogin = connection.signature!="",
+                    isConnected = true,
                     accountId = connection.accountLabel
                 )
             }
         }
     }
-    fun login(sender: ActivityResultSender, onSuccess: ()-> Unit){
+    fun connect(sender: ActivityResultSender, onSuccess: ()-> Unit){
         val conn = persistentConnection.getWalletConnection()
         viewModelScope.launch {
             val result = walletAdapter.transact(sender) {
@@ -56,7 +56,8 @@ class LoginScreenViewModel @Inject constructor(
                         Connected(
                             PublicKey(authed.publicKey),
                             authed.accountLabel ?: "",
-                            authed.authToken
+                            authed.authToken,
+                            ""
                         )
                     }
                     is Connected -> {
@@ -65,7 +66,8 @@ class LoginScreenViewModel @Inject constructor(
                         Connected(
                             PublicKey(reauthed.publicKey),
                             reauthed.accountLabel ?: "",
-                            reauthed.authToken
+                            reauthed.authToken,
+                            ""
                         )
                     }
                 }
@@ -74,12 +76,23 @@ class LoginScreenViewModel @Inject constructor(
                 is TransactionResult.Success->{
                     val accountResult = result.payload
                     persistentConnection.saveConnection(accountResult.publicKey, accountResult.accountLabel, accountResult.authToken)
+                    _state.update {
+                        it.copy(
+                            isConnected = true,
+                        )
+                    }
                     onSuccess()
                 }
                 else -> {
 
                 }
             }
+        }
+    }
+
+    fun signMessage(sender: ActivityResultSender, onSuccess: ()->Unit){
+        viewModelScope.launch {
+            kemeContract.requestSignature(sender, onSuccess = onSuccess)
         }
     }
 }

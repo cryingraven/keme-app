@@ -50,6 +50,8 @@ fun HomeScreen(
             PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
             PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
             PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
        }
    }
 }

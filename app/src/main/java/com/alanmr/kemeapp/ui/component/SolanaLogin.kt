@@ -19,7 +19,8 @@ import com.alanmr.kemeapp.R
 
 
 @Composable
-fun SolanaLogin(
+fun SolanaButton(
+    text: String,
     onClick: () -> Unit,
     modifier: Modifier
 ){
@@ -36,7 +37,7 @@ fun SolanaLogin(
                    contentDescription = stringResource(id = R.string.sol),
                    modifier = Modifier.height(30.dp).padding(2.dp),
                    contentScale = ContentScale.Fit)
-               Text(text = stringResource(id = R.string.login), style = MaterialTheme.typography.h6, textAlign = TextAlign.Center, modifier = Modifier.weight(2f))
+               Text(text = text, style = MaterialTheme.typography.h6, textAlign = TextAlign.Center, modifier = Modifier.weight(2f))
            }
         }
     }

@@ -30,13 +30,7 @@ fun MainScreen(
 ) {
 
     LaunchedEffect(true){
-        viewModel.singMessage(sender, onFailed = {
-            navController.navigate("login"){
-                this.popUpTo("login"){
-                    inclusive=true
-                }
-            }
-        })
+
     }
 
     var tabIndex by remember { mutableStateOf(0) }

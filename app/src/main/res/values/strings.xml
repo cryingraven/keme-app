@@ -22,6 +22,7 @@
     <string name="sol">Solana</string>
     <string name="point">Point</string>
     <string name="login">SIGN IN</string>
+    <string name="connect">CONNECT</string>
     <string name="logout">SIGN OUT</string>
     <string name="account">Account</string>
     <string name="tagline">"Get Cypto Rewards \n From Offline / Online Activity"</string>

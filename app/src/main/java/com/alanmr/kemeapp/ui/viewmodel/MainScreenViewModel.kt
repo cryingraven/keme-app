@@ -14,12 +14,5 @@ class MainScreenViewModel @Inject constructor(
     private val kemeContract: KemeContract,
     private val storage: AccountStorage
     ) : ViewModel(){
-    fun singMessage(sender: ActivityResultSender, onFailed: ()->Unit){
-        viewModelScope.launch {
-            kemeContract.requestSignature(sender, onFailed = {
-                storage.logout()
-                onFailed()
-            })
-        }
-    }
+
 }
