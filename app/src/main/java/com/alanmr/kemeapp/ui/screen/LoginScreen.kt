@@ -27,10 +27,9 @@ fun LoginScreen(
 ){
     val loginState = viewModel.state().collectAsState()
     LaunchedEffect(Unit){
-        viewModel.checkLogin()
-        if(loginState.value.isLogin){
+        viewModel.checkLogin(onSuccess = {
             navController.navigate("home")
-        }
+        })
     }
     Column(
         modifier = Modifier.fillMaxSize(),

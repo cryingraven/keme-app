@@ -59,23 +59,21 @@ class KemeContract @Inject constructor(
 
     suspend fun requestSignature(sender: ActivityResultSender, onSuccess: ()-> Unit){
         storage.getCurrentAccount()?.let {
-            if(it.signature==""){
-                val result =walletAdapter.transact(sender){
-                    val byteArray = PublicKey(it.accountId).toByteArray()
-                    reauthorize(solanaUri, iconUri, identityName, it.token)
-                    signMessages(arrayOf(byteArray), arrayOf(byteArray))
+            val result =walletAdapter.transact(sender){
+                val byteArray = PublicKey(it.accountId).toByteArray()
+                reauthorize(solanaUri, iconUri, identityName, it.token)
+                signMessages(arrayOf(byteArray), arrayOf(byteArray))
+            }
+            when(result){
+                is TransactionResult.Success -> {
+                    val signature = Base58.encode(result.payload.signedPayloads[0])
+                    val encodedToken = Base64.encodeToString( "${it.accountId}&${signature}".toByteArray(), Base64.NO_WRAP)
+                    val newAccount = it.copy(signature = encodedToken)
+                    storage.saveAccount(newAccount)
+                    onSuccess()
                 }
-                when(result){
-                    is TransactionResult.Success -> {
-                        val signature = Base58.encode(result.payload.signedPayloads[0])
-                        val encodedToken = Base64.encodeToString( "${it.accountId}&${signature}".toByteArray(), Base64.NO_WRAP)
-                        val newAccount = it.copy(signature = encodedToken)
-                        storage.saveAccount(newAccount)
-                        onSuccess()
-                    }
-                    else->{
+                else->{
 
-                    }
                 }
             }
         }

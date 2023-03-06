@@ -33,7 +33,7 @@ class LoginScreenViewModel @Inject constructor(
     fun state(): StateFlow<LoginScreenState>{
         return _state
     }
-    fun checkLogin(){
+    fun checkLogin(onSuccess: () -> Unit){
         val connection = persistentConnection.getWalletConnection()
         if (connection is Connected) {
             _state.update {
@@ -43,6 +43,9 @@ class LoginScreenViewModel @Inject constructor(
                     isConnected = true,
                     accountId = connection.accountLabel
                 )
+            }
+            if(connection.signature!="") {
+                onSuccess()
             }
         }
     }
