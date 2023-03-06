@@ -1,5 +1,9 @@
 package com.alanmr.kemeapp.ui.component
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -7,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -18,8 +23,13 @@ fun PromoItem(
     url: String,
     validUntil: String
 ){
+    val context: Context = LocalContext.current
     Row(modifier = Modifier.fillMaxWidth()
         .padding(top= 5.dp, bottom = 5.dp)
+        .clickable {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
+        }
     ) {
         AsyncImage(model = image,
             contentDescription = null,

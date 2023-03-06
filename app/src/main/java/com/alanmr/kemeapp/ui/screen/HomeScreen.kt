@@ -45,18 +45,11 @@ fun HomeScreen(
        Spacer(modifier = Modifier.size(4.dp))
        Text(text = "Promos", style = MaterialTheme.typography.h6)
        Column(modifier = Modifier.fillMaxWidth()) {
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
-            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.coom", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
+            PromoItem(image = "https://picsum.photos/200", title = "Lorem Ipsum Lorem", url = "https://google.com", validUntil = "01st Jan 2023")
        }
    }
 }
