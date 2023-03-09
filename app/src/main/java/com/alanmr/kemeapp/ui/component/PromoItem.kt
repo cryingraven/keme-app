@@ -43,8 +43,8 @@ fun PromoItem(
             .fillMaxWidth()
             .weight(2f)) {
             Text(text = title,
-                style = MaterialTheme.typography.h5,
-                maxLines = 1,
+                style = MaterialTheme.typography.h6,
+                maxLines = 2,
                 modifier = Modifier.fillMaxWidth()
                     .padding(4.dp))
             Text(text = "Valid Until: $validUntil",
@@ -53,6 +53,7 @@ fun PromoItem(
                     .padding(4.dp),
                 fontStyle = FontStyle.Italic
                 )
+
         }
     }
 }

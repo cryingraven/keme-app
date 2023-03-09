@@ -7,9 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -17,10 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.alanmr.kemeapp.ui.component.AccountCard
-import com.alanmr.kemeapp.ui.component.ProfileMenuItem
+import com.alanmr.kemeapp.ui.component.*
 import com.alanmr.kemeapp.ui.viewmodel.ProfileScreenViewModel
-import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 
 
 @Composable
@@ -28,6 +24,15 @@ fun ProfileScreen(
     navController: NavHostController,
     viewModel: ProfileScreenViewModel = hiltViewModel()
 ){
+    val faqDialogState: MutableState<Boolean> = remember {
+        mutableStateOf(false)
+    }
+    val tncDialogState: MutableState<Boolean> = remember {
+        mutableStateOf(false)
+    }
+    val aboutDialogState: MutableState<Boolean> = remember {
+        mutableStateOf(false)
+    }
     LaunchedEffect(true){
         viewModel.loadData()
     }
@@ -48,20 +53,36 @@ fun ProfileScreen(
                 }
             }
         })
-       Column(modifier = Modifier.fillMaxWidth()
+       Column(modifier = Modifier
+           .fillMaxWidth()
            .padding(top = 10.dp)
            .clip(shape = RoundedCornerShape(10.dp))
            .background(Color.White)
        ) {
            ProfileMenuItem(text = "FAQ", onClick = {
-
+               faqDialogState.value = true
            })
            ProfileMenuItem(text = "Term & Conditions", onClick = {
-
+                tncDialogState.value = true
            })
            ProfileMenuItem(text = "About", onClick = {
-
+                aboutDialogState.value = true
            })
        }
+       if(faqDialogState.value){
+           FAQDialog {
+               faqDialogState.value = false
+           }
+       }
+        if(tncDialogState.value){
+            TNCDialog {
+                tncDialogState.value = false
+            }
+        }
+        if(aboutDialogState.value){
+            AboutDialog {
+                aboutDialogState.value = false
+            }
+        }
     }
 }
