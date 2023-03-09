@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -38,6 +39,8 @@ fun HomeScreen(
        .padding(5.dp)
        .verticalScroll(rememberScrollState())) {
        Spacer(modifier = Modifier.size(4.dp))
+       Text(text = "Home", style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
+       Spacer(modifier = Modifier.size(8.dp))
        Text(text = "News", style = MaterialTheme.typography.h6)
        Row(modifier = Modifier
            .fillMaxWidth()
