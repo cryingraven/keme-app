@@ -18,12 +18,7 @@ fun KemeLogo(
     modifier: Modifier
 ){
     Column {
-        Image(painter = painterResource(id = R.drawable.gold),
-            contentDescription = stringResource(id = R.string.logo),
-            contentScale = ContentScale.FillWidth,
-            modifier = modifier
-        )
-        Image(painter = painterResource(id = R.drawable.logo),
+        Image(painter = painterResource(id = R.drawable.logo_keme),
             contentDescription = stringResource(id = R.string.logo),
             contentScale = ContentScale.FillWidth,
             modifier = modifier.height(80.dp)
