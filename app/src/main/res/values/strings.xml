@@ -25,5 +25,7 @@
     <string name="connect">CONNECT</string>
     <string name="logout">SIGN OUT</string>
     <string name="account">Account</string>
-    <string name="tagline">"Get Cypto Rewards \n From Offline / Online Activity"</string>
+    <string name="tagline">"Get Cypto Rewards \n From Offline/Online Activities"</string>
+    <string name="before_connect">You need to connect your wallet \n before Sign In</string>
+    <string name="before_sign_in">Tao "Sign In" to Enter</string>
 </resources>

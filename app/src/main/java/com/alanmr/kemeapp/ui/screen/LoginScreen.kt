@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alanmr.kemeapp.ui.component.KemeLogo
@@ -57,10 +59,27 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(30.dp))
         Text(text = stringResource(id = com.alanmr.kemeapp.R.string.tagline),
             textAlign = TextAlign.Center,
+            fontSize = 18.sp,
             modifier = Modifier.padding(5.dp),
             fontStyle = FontStyle.Italic
         )
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(15.dp))
+        if(!loginState.value.isLoading) {
+            if (loginState.value.isConnected) {
+                Text(text = stringResource(id = com.alanmr.kemeapp.R.string.before_sign_in),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(5.dp),
+                    fontWeight = FontWeight.Bold
+                )
+            } else {
+                Text(text = stringResource(id = com.alanmr.kemeapp.R.string.before_connect),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(5.dp),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(15.dp))
         if(!loginState.value.isLoading){
             if(loginState.value.isConnected){
                 SolanaButton(
