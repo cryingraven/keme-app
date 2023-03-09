@@ -25,15 +25,16 @@ class HomeScreenViewModel @Inject constructor(
         return _state
     }
     fun loadData(){
-        storage.getCurrentAccount()?.run {
-            _state.update {
-                it.copy(
-                    accountId = this.accountId
-                )
-            }
-        }
         viewModelScope.launch {
+            storage.getCurrentAccount()?.run {
+                _state.update {
+                    it.copy(
+                        accountId = this.accountId
+                    )
+                }
+            }
             kemeService.getNews().awaitResponse().run {
+                val response = this
                 this.body()?.apply {
                     _state.update {
                         it.copy(

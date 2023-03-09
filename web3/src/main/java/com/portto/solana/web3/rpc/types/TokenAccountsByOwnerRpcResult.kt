@@ -25,8 +25,6 @@ class TokenAccountsByOwnerRpcResult(val value: ArrayList<ValueItem>) : RpcResult
             val owner: String,
             @SerialName("rentEpoch")
             val rentEpoch: Int,
-            @SerialName("space")
-            val space: Int
         ) {
             @Serializable
             data class Data(
@@ -34,8 +32,6 @@ class TokenAccountsByOwnerRpcResult(val value: ArrayList<ValueItem>) : RpcResult
                 val program: String,
                 @SerialName("parsed")
                 val parsed: Parsed,
-                @SerialName("space")
-                val space: Int
             ) {
                 @Serializable
                 data class Parsed(

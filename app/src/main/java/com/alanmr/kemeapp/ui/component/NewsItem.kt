@@ -37,7 +37,7 @@ fun NewsItem(
             modifier = Modifier.fillMaxWidth()
                 .height(200.dp)
                 .clip(shape = RoundedCornerShape(15.dp)),
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
         )
         Text(text= title,
             modifier = Modifier.fillMaxWidth()

@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,9 @@ fun PromoItem(
     ) {
         AsyncImage(model = image,
             contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier.width(100.dp)
+                .height(100.dp)
                 .clip(shape = RoundedCornerShape(15.dp)))
         Column(verticalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -41,6 +44,7 @@ fun PromoItem(
             .weight(2f)) {
             Text(text = title,
                 style = MaterialTheme.typography.h5,
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth()
                     .padding(4.dp))
             Text(text = "Valid Until: ${validUntil}",

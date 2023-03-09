@@ -8,6 +8,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,12 +24,16 @@ class HTTPModule {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(Interceptor { chain ->
                 val request = chain.request()
-                    .newBuilder()
+                val newRequest = Request.Builder()
+                    .url(request.url)
+                    .header("Content-Type","application/json")
+                    .method(request.method, request.body)
                 storage.getCurrentAccount()?.let {
-                    request.addHeader("Authorization", it.token)
+                    newRequest.addHeader("Authorization", it.signature)
                 }
-                chain.proceed(request.build())
+                chain.proceed(newRequest.build())
             })
+            .addNetworkInterceptor(HttpLoggingInterceptor())
             .build()
         return Retrofit.Builder()
             .client(okHttpClient)
