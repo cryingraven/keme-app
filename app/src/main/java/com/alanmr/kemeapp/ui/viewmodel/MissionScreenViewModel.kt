@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alanmr.kemeapp.modules.AccountStorage
 import com.alanmr.kemeapp.modules.keme.KemeService
-import com.alanmr.kemeapp.ui.state.HomeScreenState
+import com.alanmr.kemeapp.ui.state.MissionScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,12 +14,12 @@ import retrofit2.awaitResponse
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(
+class MissionScreenViewModel @Inject constructor(
     private val storage: AccountStorage,
     private val kemeService: KemeService
 ): ViewModel() {
-    private val _state = MutableStateFlow(HomeScreenState())
-    fun state(): StateFlow<HomeScreenState>{
+    private val _state = MutableStateFlow(MissionScreenState())
+    fun state(): StateFlow<MissionScreenState>{
         return _state
     }
     fun loadData(){
@@ -31,20 +31,11 @@ class HomeScreenViewModel @Inject constructor(
                     )
                 }
             }
-            kemeService.getNews().awaitResponse().run {
+            kemeService.getMissions().awaitResponse().run {
                 this.body()?.apply {
                     _state.update {
                         it.copy(
-                            newsList = this.news
-                        )
-                    }
-                }
-            }
-            kemeService.getPromo().awaitResponse().run {
-                this.body()?.apply {
-                    _state.update {
-                        it.copy(
-                            promoList = this.promo
+                            missionList = this.missions
                         )
                     }
                 }

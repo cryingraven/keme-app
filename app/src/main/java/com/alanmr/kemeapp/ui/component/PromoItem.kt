@@ -47,7 +47,7 @@ fun PromoItem(
                 maxLines = 1,
                 modifier = Modifier.fillMaxWidth()
                     .padding(4.dp))
-            Text(text = "Valid Until: ${validUntil}",
+            Text(text = "Valid Until: $validUntil",
                 style = MaterialTheme.typography.caption,
                 modifier = Modifier.fillMaxWidth()
                     .padding(4.dp),

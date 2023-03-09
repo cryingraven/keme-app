@@ -15,27 +15,32 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.alanmr.kemeapp.R
+import java.util.Date
 
 
 @Composable
-fun MissionCard(){
+fun MissionCard(
+    title: String,
+    image: String,
+    description: String,
+    validUntil: String
+){
     Column(modifier = Modifier.fillMaxWidth()
     ) {
-        Row(modifier = Modifier.fillMaxWidth()
+        Row(modifier = Modifier
+            .fillMaxWidth()
             .padding(5.dp)
             .clip(shape = RoundedCornerShape(10.dp))
             .background(Color.White)
             .clickable {
 
             }) {
-            Image(painter = painterResource(id = R.drawable.ticket),
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
-                contentDescription = null,
+            AsyncImage(model = image, contentDescription = null,
                 modifier = Modifier
                     .width(100.dp)
-                    .padding(5.dp)
-            )
+                    .padding(5.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -44,9 +49,9 @@ fun MissionCard(){
                     .padding(5.dp),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Mission Title", style = MaterialTheme.typography.h6)
-                Text(text = "valid util: ", style = MaterialTheme.typography.caption, fontStyle = FontStyle.Italic)
-                Text(text = "Mission Caption", style = MaterialTheme.typography.caption)
+                Text(text = title, style = MaterialTheme.typography.h6)
+                Text(text = "valid util: $validUntil", style = MaterialTheme.typography.caption, fontStyle = FontStyle.Italic)
+                Text(text = description, style = MaterialTheme.typography.caption)
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.alanmr.kemeapp.modules.keme
 
+import com.alanmr.kemeapp.model.MissionResponse
 import com.alanmr.kemeapp.model.NewsResponse
 import com.alanmr.kemeapp.model.PromoResponse
 import retrofit2.Call
@@ -12,4 +13,7 @@ interface KemeService {
 
     @GET("promo/all")
     fun getPromo(): Call<PromoResponse>
+
+    @GET("mission/all")
+    fun getMissions(): Call<MissionResponse>
 }
