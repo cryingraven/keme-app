@@ -2,6 +2,8 @@ package com.alanmr.kemeapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alanmr.kemeapp.model.FinishMissionRequest
+import com.alanmr.kemeapp.model.Mission
 import com.alanmr.kemeapp.modules.AccountStorage
 import com.alanmr.kemeapp.modules.keme.KemeService
 import com.alanmr.kemeapp.ui.state.MissionScreenState
@@ -52,4 +54,71 @@ class MissionScreenViewModel @Inject constructor(
         }
     }
 
+    fun finishMission(mission: Mission){
+        viewModelScope.launch {
+            try {
+                if(mission.completed){
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = "Mission Already Completed"
+                        )
+                    }
+                }else{
+                    _state.update {
+                        it.copy(
+                            isLoading = true,
+                            errorMessage = ""
+                        )
+                    }
+                    val finishRequest = FinishMissionRequest()
+                    finishRequest.mission_id = mission._id
+                    kemeService.finishMission(finishRequest).awaitResponse().run {
+                        if(this.isSuccessful){
+                            this.body()?.apply {
+                                if(this.hash!=""){
+                                    _state.update {
+                                        it.copy(
+                                            isLoading = false,
+                                            errorMessage = "Congratulation You Got ${mission.reward} Point"
+                                        )
+                                    }
+                                }else{
+                                    _state.update {
+                                        it.copy(
+                                            isLoading = false,
+                                            errorMessage = "Failed To Finish Mission"
+                                        )
+                                    }
+                                }
+                            }
+                        }else{
+                            _state.update {
+                                it.copy(
+                                    isLoading = false,
+                                    errorMessage = "Failed To Finish Mission"
+                                )
+                            }
+                        }
+                        loadData()
+                    }
+                }
+            }catch (e: java.lang.Exception){
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = "Failed To Finish Mission"
+                    )
+                }
+            }
+        }
+    }
+
+    fun dismissError(){
+        _state.update {
+            it.copy(
+                errorMessage = ""
+            )
+        }
+    }
 }

@@ -38,13 +38,14 @@ fun MissionCard(
     reward: Number,
     onClick: ()->Unit
 ){
+    val backgroundColor = if(completed){ Color.LightGray  }else{ Color.White }
     Column(modifier = Modifier.fillMaxWidth()
     ) {
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
             .clip(shape = RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .background(backgroundColor)
             .clickable {
                 onClick()
             },

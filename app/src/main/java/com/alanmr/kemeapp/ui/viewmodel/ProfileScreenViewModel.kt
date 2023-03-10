@@ -1,14 +1,11 @@
 package com.alanmr.kemeapp.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alanmr.kemeapp.modules.AccountStorage
-import com.alanmr.kemeapp.modules.solana.KemeContract
 import com.alanmr.kemeapp.modules.solana.PersistentConnection
 import com.alanmr.kemeapp.modules.solana.SolanaRPC
 import com.alanmr.kemeapp.ui.state.ProfileScreenState
-import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

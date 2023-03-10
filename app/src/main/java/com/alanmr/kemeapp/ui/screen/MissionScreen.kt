@@ -6,14 +6,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.alanmr.kemeapp.ui.component.LoadingDialog
+import com.alanmr.kemeapp.ui.component.MessageDialog
 import com.alanmr.kemeapp.ui.component.MissionCard
 import com.alanmr.kemeapp.ui.viewmodel.MissionScreenViewModel
 import java.text.SimpleDateFormat
@@ -23,6 +23,7 @@ fun MissionScreen(
     navController: NavHostController,
     viewModel: MissionScreenViewModel = hiltViewModel()
 ){
+
     val missionState = viewModel.state().collectAsState()
     LaunchedEffect(Unit){
         viewModel.loadData()
@@ -46,7 +47,7 @@ fun MissionScreen(
                 reward = it.reward,
                 completed = it.completed,
                 onClick = {
-
+                    viewModel.finishMission(it)
                 }
             )
         }
@@ -62,9 +63,21 @@ fun MissionScreen(
                 reward = it.reward,
                 completed = it.completed,
                 onClick = {
-
+                    viewModel.finishMission(it)
                 }
             )
+        }
+
+        if(missionState.value.isLoading){
+            LoadingDialog(onDismissRequest = {
+
+            })
+        }
+
+        if(missionState.value.errorMessage!=""){
+            MessageDialog(message = missionState.value.errorMessage, onDismissRequest = {
+                viewModel.dismissError()
+            })
         }
     }
 }
