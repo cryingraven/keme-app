@@ -44,15 +44,7 @@ fun ProfileScreen(
         Spacer(modifier = Modifier.size(4.dp))
         Text(text = "Profile", style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
         Spacer(modifier = Modifier.size(8.dp))
-        AccountCard(account = profileSate.value.accountId, balance = profileSate.value.balance, onTap = {}, onLogout = {
-            viewModel.logout {
-                navController.navigate("login"){
-                    this.popUpTo("login"){
-                        inclusive=true
-                    }
-                }
-            }
-        })
+        AccountCard(account = profileSate.value.accountId, balance = profileSate.value.balance, onTap = {})
        Column(modifier = Modifier
            .fillMaxWidth()
            .padding(top = 10.dp)
@@ -62,11 +54,20 @@ fun ProfileScreen(
            ProfileMenuItem(text = "FAQ", onClick = {
                faqDialogState.value = true
            })
-           ProfileMenuItem(text = "Term & Conditions", onClick = {
-                tncDialogState.value = true
-           })
+//           ProfileMenuItem(text = "Term & Conditions", onClick = {
+//                tncDialogState.value = true
+//           })
            ProfileMenuItem(text = "About", onClick = {
                 aboutDialogState.value = true
+           })
+           ProfileMenuItem(text = "Sign Out", onClick = {
+               viewModel.logout {
+                   navController.navigate("login"){
+                       this.popUpTo("login"){
+                           inclusive=true
+                       }
+                   }
+               }
            })
        }
        if(faqDialogState.value){

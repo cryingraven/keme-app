@@ -28,7 +28,6 @@ fun AccountCard(
     account: String,
     balance: String,
     onTap: ()-> Unit,
-    onLogout: ()-> Unit
 ){
     val visibilityState = remember {
         MutableTransitionState(true)
@@ -43,22 +42,7 @@ fun AccountCard(
         Column(modifier = Modifier
             .weight(2f)
             .padding(10.dp)) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(text = stringResource(id = R.string.account), color = MaterialTheme.colors.onPrimary, modifier = Modifier.weight(2f))
-                Column(
-                    verticalArrangement= Arrangement.Center,
-                    modifier = Modifier
-                        .padding(start = 10.dp)
-                        .clickable {
-                            onLogout()
-                        }) {
-                    Image(painter = painterResource(id = R.drawable.logout),
-                        contentDescription = stringResource(id = R.string.logout),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
-                        modifier = Modifier.width(48.dp)
-                    )
-                }
-            }
+            Text(text = stringResource(id = R.string.account), color = MaterialTheme.colors.onPrimary)
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = account,
                 color = MaterialTheme.colors.onPrimary,

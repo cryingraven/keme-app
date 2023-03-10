@@ -5,5 +5,6 @@ import com.alanmr.kemeapp.model.Mission
 
 data class MissionScreenState (
     val accountId: String="",
-    val missionList: ArrayList<Mission> = arrayListOf(),
+    val missionListDaily: ArrayList<Mission> = arrayListOf(),
+    val missionListWeekly: ArrayList<Mission> = arrayListOf(),
 )

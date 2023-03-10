@@ -31,11 +31,20 @@ class MissionScreenViewModel @Inject constructor(
                     )
                 }
             }
-            kemeService.getMissions().awaitResponse().run {
+            kemeService.getMissions("daily").awaitResponse().run {
                 this.body()?.apply {
                     _state.update {
                         it.copy(
-                            missionList = this.missions
+                            missionListDaily = this.missions
+                        )
+                    }
+                }
+            }
+            kemeService.getMissions("weekly").awaitResponse().run {
+                this.body()?.apply {
+                    _state.update {
+                        it.copy(
+                            missionListWeekly = this.missions
                         )
                     }
                 }

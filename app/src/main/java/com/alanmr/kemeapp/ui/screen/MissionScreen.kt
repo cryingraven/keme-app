@@ -33,11 +33,38 @@ fun MissionScreen(
         .verticalScroll(state = rememberScrollState())
     ) {
         Spacer(modifier = Modifier.size(4.dp))
-        Text(text = "Daily Mission", style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
+        Text(text = "Mission", style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
         Spacer(modifier = Modifier.size(8.dp))
-        missionState.value.missionList.map {
+        Text(text = "Daily", style = MaterialTheme.typography.h6)
+        Spacer(modifier = Modifier.size(4.dp))
+        missionState.value.missionListDaily.map {
             val formatedDate = SimpleDateFormat("dd MMM yyyy").format(it.valid_until)
-            MissionCard(title = it.title, image = it.image, description = it.description, validUntil = formatedDate)
+            MissionCard(title = it.title,
+                image = it.image,
+                description = it.description,
+                validUntil = formatedDate,
+                reward = it.reward,
+                completed = it.completed,
+                onClick = {
+
+                }
+            )
+        }
+        Spacer(modifier = Modifier.size(4.dp))
+        Text(text = "Weekly", style = MaterialTheme.typography.h6)
+        Spacer(modifier = Modifier.size(4.dp))
+        missionState.value.missionListWeekly.map {
+            val formatedDate = SimpleDateFormat("dd MMM yyyy").format(it.valid_until)
+            MissionCard(title = it.title,
+                image = it.image,
+                description = it.description,
+                validUntil = formatedDate,
+                reward = it.reward,
+                completed = it.completed,
+                onClick = {
+
+                }
+            )
         }
     }
 }
