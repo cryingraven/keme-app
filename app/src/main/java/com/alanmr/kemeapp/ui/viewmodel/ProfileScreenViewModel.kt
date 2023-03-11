@@ -39,6 +39,7 @@ class ProfileScreenViewModel @Inject constructor(
                     }else{
                         it.copy(
                             accountId = "${chunk[0]}...${chunk[3]}",
+                            balance = "0"
                         )
                     }
 

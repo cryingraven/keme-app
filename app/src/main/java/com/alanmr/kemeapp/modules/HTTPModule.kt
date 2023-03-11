@@ -22,6 +22,8 @@ class HTTPModule {
     @Provides
     fun httpClient(storage: AccountStorage): KemeService{
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+            .followRedirects(false)
+            .followSslRedirects(false)
             .addInterceptor(Interceptor { chain ->
                 val request = chain.request()
                 val newRequest = Request.Builder()
